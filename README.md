@@ -33,5 +33,5 @@ Tested on Mac OSX with the Alcor Micro AU9540 Smart Card Reader.
 </div>
 
 <div align="center">
-   <img src="doc/AU9540-2.jpg" width=600 style="margin:1rem;" />
+   <img src="doc/AU9540-2.jpg" width=1536 style="margin:1rem;" />
 </div>
