@@ -1,0 +1,118 @@
+
+<!doctype html>
+
+<html>
+<head>
+    <title><%= ipaddress %></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <style>
+
+        .c-guage {
+            width:300px; height:220px;
+            display: inline-block;
+            margin: 1em;
+
+        }
+        #g1-trmp, #g2-humi{
+            display: inline-block;
+            margin: 1em;
+        }
+        .status {
+            display: inline-block;
+        }
+
+
+        p {
+            display: block;
+            width: 450px;
+            margin: 2em auto;
+            text-align: left;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -moz-box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+        }
+    </style>
+
+    <script src="/javascripts/socket.io.js"></script>
+    <script src="/javascripts/jquery-2.1.4.min.js"></script>
+    <script src="/javascripts/raphael.2.1.0.min.js"></script>
+    <script src="/javascripts/justgage.1.0.1.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>    
+
+
+    <script>
+
+        var socket = io('http://<%= ipaddress %>:8081');
+        var data = [];
+            
+                	 socket.on('List1', function(data){
+					 	var List1 = '';
+					 	var count = 1;
+					 	var rows = [];
+					 	
+
+					 		rows.push("<tr>");
+							rows.push("<td>"+data[0]+"</td>");
+						 	rows.push("<td>"+data[1]+"</td>");
+						 	rows.push("<td>"+data[2]+"</td>");
+						 	rows.push("<td>"+data[3]+"</td>");
+						 	rows.push("<td>"+data[4]+"</td>");
+						 	rows.push("<td>"+data[5]+"</td>");
+							rows.push("</tr>");
+							  
+							$("#List1 tbody").html(rows.join());
+							  
+						
+                    });
+
+
+	    
+        
+    </script>
+
+</head>
+<body>
+
+
+
+
+
+
+<div style="text-align:center">
+
+	<H1>โปรแกรมอ่านบัตรประชาชน </H1>
+
+
+
+<div class="container">
+  <h2>แสดงรายการบุคคล</h2>
+  <p>รายชื่อ</p>            
+  <table class="table table-hover" id="List1">
+    <thead>
+      <tr>
+        <th>หมายเลขบัตรประชาชน</th>        
+        <th>ชื่อ-นามสกุล</th>
+        <th>Name-Surname</th>
+        <th>วันเกิด</th> 
+        <th>ที่อยู่</th>
+        <th>วันออกบัตร/วันบัตรหมดอายุ</th>        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+</body>
+</html>
