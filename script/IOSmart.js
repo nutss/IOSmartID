@@ -69,8 +69,9 @@ http.listen(8081, function(){
 io.sockets.on('connection', function(socket) {
 			
 	  setInterval(function(){
+		  
 
-	  		socket.emit('List1',SmartcardData);
+	  		//socket.emit('List1',SmartcardData);
 	  
 	  }, 1000);
 });
@@ -78,11 +79,11 @@ io.sockets.on('connection', function(socket) {
 
 
 devices.on('device-activated', function (event) {
-    console.log(`Device '${event.reader.name}' activated, devices: ${devices.listDevices()}`);
+    //console.log(`Device '${event.reader.name}' activated, devices: ${devices.listDevices()}`);
 });
 
 devices.on('device-deactivated', function (event) {
-    console.log(`Device '${event.reader.name}' deactivated, devices: ${devices.listDevices()}`);
+    //console.log(`Device '${event.reader.name}' deactivated, devices: ${devices.listDevices()}`);
 });
 
 devices.on('card-removed', function (event) {
@@ -91,9 +92,18 @@ devices.on('card-removed', function (event) {
 
 devices.on('command-issued', function (event) {
     //console.log(`Command '${event.command}' issued to '${event.reader.name}' `);
+    //console.log(SmartcardData[1]);
+    //console.log(`List devices: ${devices.listDevices()}`);
+
+
+    //console.log(`Response '${event.response[0]}' received from '${event.reader.name}' in response to '${event.command}'`);
 });
 
 devices.on('response-received', function (event) {
+	
+
+
+			
     //console.log(`Response '${event.response}' received from '${event.reader.name}' in response to '${event.command}'`);
 });
 
@@ -102,18 +112,18 @@ devices.on('error', function (event) {
 });
 
 devices.on('card-inserted', function (event) {
-
-    console.log(`List devices: ${devices.listDevices()}`);
     var reader = event.reader;
-    console.log(`Card inserted into '${reader.name}' `);
-	
-	 
-    devices
-        .getInfo(reader)
-        .then(function (response) {
-            SmartcardData = response;
-            console.log(SmartcardData);
-        }).catch(function (error) {
-            console.error(error);
-        });
+    devices.getInfo(reader).then(function (response) {
+			console.log('a');
+			SmartcardData = response;
+	            
+        });   
+        
+        setTimeout(function(){
+	        console.log(SmartcardData[0]);
+	    }, 1000);
+
+		
 });
+
+
